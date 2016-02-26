@@ -77,7 +77,9 @@ def getSimpleModeMaterials():
 
 def setupLocalization(selectedLanguage = None):
 	#Default to english
-	languages = ['en']
+	#languages = ['en']
+	#Default to ESPANOL - MAXI
+	languages = ['es']
 
 	if selectedLanguage is not None:
 		for item in getLanguageOptions():
@@ -90,16 +92,19 @@ def setupLocalization(selectedLanguage = None):
 	translation.install(unicode=True)
 
 def getLanguageOptions():
+	
+	# Modificada por MAXI
+	
 	return [
 		['en', 'English'],
-		['de', 'Deutsch'],
-		['fr', 'French'],
-		['tr', 'Turkish'],
-		['ru', 'Russian'],
+		#['de', 'Deutsch'],
+		#['fr', 'French'],
+		#['tr', 'Turkish'],
+		#['ru', 'Russian'],
 		# ['it', 'Italian'],
 		# ['ko', 'Korean'],
 		# ['zh', 'Chinese'],
 		# ['nl', 'Nederlands'],
-		# ['es', 'Spanish'],
+		['es', 'Spanish'],					
 		# ['po', 'Polish'],
 	]
