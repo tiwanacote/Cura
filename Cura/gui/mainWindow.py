@@ -94,7 +94,8 @@ class mainWindow(wx.Frame):
 		self.normalModeOnlyItems.append(i)
 		self.Bind(wx.EVT_MENU, self.OnSaveProfile, i)
 		if version.isDevVersion():
-			i = self.fileMenu.Append(-1, "Save difference from default...")
+			#i = self.fileMenu.Append(-1, "Save difference from default...")		MAXI: No lo cambia desde el archivo cura.po
+			i = self.fileMenu.Append(-1, "Guardar diferencias con perfil original...")
 			self.normalModeOnlyItems.append(i)
 			self.Bind(wx.EVT_MENU, self.OnSaveDifferences, i)
 		i = self.fileMenu.Append(-1, _("Load Profile from GCode..."))
