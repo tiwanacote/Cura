@@ -80,7 +80,8 @@ def setupLocalization(selectedLanguage = None):
 	#languages = ['en']
 	#Default to ESPANOL - MAXI
 	languages = ['es']
-
+	
+	
 	if selectedLanguage is not None:
 		for item in getLanguageOptions():
 			if item[1] == selectedLanguage and item[0] is not None:
@@ -96,6 +97,7 @@ def getLanguageOptions():
 	# Modificada por MAXI
 	
 	return [
+
 		['en', 'English'],
 		#['de', 'Deutsch'],
 		#['fr', 'French'],

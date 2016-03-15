@@ -2006,7 +2006,8 @@ msgid ""
 "better. But a very high retraction speed can lead to filament grinding."
 msgstr ""
 "Velocidad a la que el filamento es retraido, a mayor velocidad mejor "
-"funcionamiento. Velocidades muy alta puedes comerse el filamento."
+"funcionamiento. Velocidades muy altas pueden hacer que la rueda tractora"
+"del extrusor desgaste localmente al filamento."
 
 #: Cura/util/profile.py:204
 msgid "Distance (mm)"
@@ -2017,7 +2018,7 @@ msgid ""
 "Amount of retraction, set at 0 for no retraction at all. A value of 4.5mm "
 "seems to generate good results."
 msgstr ""
-"Cantidad de retracción, fijar a 0 para no retraer. Un valor de 4.5mm parece "
+"Cantidad de retracción, fijar a 0 para no retraer. Un valor de 1 a 4.5mm parece "
 "ofrecer buenos resultados."
 
 #: Cura/util/profile.py:205
@@ -2041,8 +2042,8 @@ msgid ""
 "Minimum amount of travel needed for a retraction to happen at all. To make "
 "sure you do not get a lot of retractions in a small area."
 msgstr ""
-"Minima distancia de desplazamiento necesaria para retraer. Para asegurar que "
-"no retrae en pequeñas areas"
+"Mínima distancia de desplazamiento necesaria para retraer. Para asegurar de "
+"no retrae en pequeñas areas. Esto desgasta el filamento y genera otros errores de impresión."
 
 #: Cura/util/profile.py:207
 msgid "Off"
@@ -2085,11 +2086,11 @@ msgid ""
 "This avoids retracting a lot on the same piece of filament which flattens the "
 "filament and causes grinding issues."
 msgstr ""
-"La cantidad mínima de extrusión que hay que hacer antes de retraer de nuevo si "
+"La cantidad mínima de extrusión que hay que hacer antes de retraer de nuevo. Si "
 "una retracción tiene que ocurrir antes de que este mínimo se alcanza la "
 "retracción se ignora.\n"
-"Esto evita la retracción mucho en la misma pieza de filamento que se aplana el "
-"filamento y provoca problemas de molienda."
+"Esto evita que se desgaste el filamento localmente producto de continuas" 
+"retracciones en el mismo lugar del mismo."
 
 #: Cura/util/profile.py:209
 msgid "Z hop when retracting (mm)"
@@ -2101,9 +2102,9 @@ msgid ""
 "the print. A value of 0.075 works well. This feature has a lot of positive "
 "effect on delta towers."
 msgstr ""
-"Cuando se realiza una retractación, la cabeza es levantada por esta cantidad "
-"para viajar por la impresión. Un valor de 0,075 funciona bien. Esta "
-"característica tiene una gran cantidad de efecto positivo en torres delta."
+"Cuando se realiza una retractación, la cabeza es levantada por la distancia especificada "
+"para viajar por sobre la impresión. Un valor de 0,075 funciona bien. Esta "
+"característica tiene una beneficiosa en torres."
 
 #: Cura/util/profile.py:210
 msgid "Initial layer thickness (mm)"
@@ -2142,7 +2143,7 @@ msgid ""
 "have a flat bottom and thus create a too small first layer."
 msgstr ""
 "Hunde el objeto en la plataforma, esto puede ser utilizado para objetos que no "
-"tienen un fondo plano y por lo tanto crean una primera capa demasiado pequeño."
+"tienen un fondo plano y por lo tanto crean una primera capa de pequeña superficie."
 
 #: Cura/util/profile.py:214
 msgid "Dual extrusion overlap (mm)"
@@ -2170,9 +2171,10 @@ msgid ""
 "Speed at which travel moves are done, a well built Ultimaker can reach speeds "
 "of 250mm/s. But some machines might miss steps then."
 msgstr ""
-"Velocidad a la que se realizan viajes movimientos, un Ultimaker bien "
-"construido puede alcanzar velocidades de 250 mm/s . Pero algunas máquinas "
-"podrían perderse los pasos a continuación ."
+"Velocidad a la que se realizan los movimientos de translación sin extrusión. "
+"Por lo general se pueden alcanzar altas velocidades en la mayoría de las máquinas,"
+"el problema es que podrían perder pasos y aparecer ruidos de vibraciones. Se puede probar"
+"entre 55 y 100"
 
 #: Cura/util/profile.py:216
 msgid "Bottom layer speed (mm/s)"
@@ -2183,7 +2185,7 @@ msgid ""
 "Print speed for the bottom layer, you want to print the first layer slower so "
 "it sticks better to the printer bed."
 msgstr ""
-"Velocidad de impresión para la capa inferior, esta capa debe imprimirse mas "
+"Velocidad de impresión para la primer capa inferior. Esta capa debe imprimirse mas "
 "lenta para mejor la adhesión."
 
 #: Cura/util/profile.py:217
@@ -2196,10 +2198,10 @@ msgid ""
 "used for the infill. Printing the infill faster can greatly reduce printing "
 "time, but this can negatively affect print quality."
 msgstr ""
-"Velocidad a la que se imprimen las piezas de relleno. Si se establece en 0, "
-"entonces la velocidad de impresión se utiliza para el relleno. Imprimir el "
+"Velocidad a la que se imprimen el relleno de las piezas. Si se establece en 0, "
+"entonces la velocidad de impresión se utiliza como velocidad de relleno. Imprimir el "
 "relleno más rápido puede reducir considerablemente el tiempo de impresión, "
-"pero esto puede afectar negativamente a la calidad de impresión."
+"pero esto puede afectar negativamente a la calidad."
 
 #: Cura/util/profile.py:218
 msgid "Top/bottom speed (mm/s)"
@@ -2211,9 +2213,9 @@ msgid ""
 "is used for the infill. Printing the top/bottom faster can greatly reduce "
 "printing time, but this can negatively affect print quality."
 msgstr ""
-"Velocidad a la que arriba/partes inferiores se imprimen. Si se establece en 0, "
-"entonces la velocidad de impresión se utiliza para el relleno. Impresión de la "
-"parte superior/inferior más rápido puede reducir considerablemente el tiempo "
+"Velocidad a la que se imprimen las tapas inferiores y superiores de las piezas."
+"Si se establece en 0, entonces la velocidad de impresión se utiliza para el caso.
+"Impresión de la parte superior/inferior más rápido puede reducir considerablemente el tiempo "
 "de impresión, pero esto puede afectar negativamente a la calidad de impresión."
 
 #: Cura/util/profile.py:219
@@ -2231,7 +2233,7 @@ msgstr ""
 "se utiliza la velocidad de impresión. Impresión de la capa exterior a una "
 "velocidad inferior mejora la calidad final de la piel. Sin embargo, tener una "
 "gran diferencia entre la velocidad de la cáscara interior y la cáscara "
-"exterior velocidad afectará a la calidad de una manera negativa."
+"exterior de velocidad afectará a la calidad de una manera negativa."
 
 #: Cura/util/profile.py:220
 msgid "Inner shell speed (mm/s)"
@@ -2265,10 +2267,10 @@ msgid ""
 "printer will slow down to make sure it has spent at least this amount of "
 "seconds printing this layer."
 msgstr ""
-"Tiempo mínimo de permanencia en una capa, le da al tiempo de capa para que se "
+"Tiempo mínimo de permanencia en una capa. Le da al tiempo de capa para que se "
 "enfríe antes de poner la siguiente capa en la parte superior. Si la capa se "
-"colocará abajo demasiado rápido la impresora se ralentizará para asegurarse de "
-"que ha pasado por lo menos esta cantidad de segundos la impresión de esta capa."
+"colocara abajo demasiado rápido la impresora se ralentizará para asegurarse de "
+"que ha pasado por lo menos esta cantidad de segundos."
 
 #: Cura/util/profile.py:222
 msgid "Enable cooling fan"
@@ -2280,7 +2282,7 @@ msgid ""
 "fan is essential during faster prints."
 msgstr ""
 "Activa la ventilación durante la impresión. La ventilación extra es esencial "
-"en las impresiones rápidas."
+"en las impresiones con PLA."
 
 #: Cura/util/profile.py:224
 msgid "Line count"
@@ -2334,9 +2336,9 @@ msgid ""
 "The height at which the fan is turned on completely. For the layers below this "
 "the fan speed is scaled linearly with the fan off at layer 0."
 msgstr ""
-"La altura a la que el ventilador se enciende completamente. Para las capas por "
-"debajo de esta la velocidad del ventilador se escala linealmente con el "
-"ventilador en la capa 0."
+"Altura a la que el ventilador se enciende completamente. Para las capas por "
+"debajo de esta, la velocidad del ventilador se escala linealmente con respecto "
+"a la velocidad máxima y mínima."
 
 #: Cura/util/profile.py:228
 msgid "Fan speed min (%)"
@@ -2348,10 +2350,7 @@ msgid ""
 "down the layer, the fan is adjusted between the min and max speed. Minimal fan "
 "speed is used if the layer is not slowed down due to cooling."
 msgstr ""
-"Cuando el ventilador esta activado, funciona a esta velocidad. Si la "
-"ventilación reduce la velocidad de la capa, el ventilador se ajustará en las "
-"velocidades max y min. La velocidad minima será usada si no se reduce la "
-"velocidad debido al la ventilación."
+"Mínima velocidad del ventilador. Valores muy bajos distintos a cero pueden hacer que ni siquiera arranque."
 
 #: Cura/util/profile.py:229
 msgid "Fan speed max (%)"
@@ -2363,10 +2362,7 @@ msgid ""
 "down the layer, the fan is adjusted between the min and max speed. Maximal fan "
 "speed is used if the layer is slowed down due to cooling by more than 200%."
 msgstr ""
-"Cuando el ventilador está encendido, se habilita en este nivel de velocidad. "
-"Si la ventialción ralentiza la capa, se ajusta entre el min y la velocidad "
-"máxima. Máxima velocidad del ventilador se utiliza si la capa se hace más "
-"lenta debido al enfriamiento por más de 200%."
+"Velocidad máxima del ventilador""
 
 #: Cura/util/profile.py:230
 msgid "Minimum speed (mm/s)"
@@ -2378,8 +2374,8 @@ msgid ""
 "ooze. The minimal feedrate protects against this. Even if a print gets slowed "
 "down it will never be slower than this minimal speed."
 msgstr ""
-"El tiempo mínimo por capa puede hacer que la impresión se ralentice tanto que "
-"el extrusor empieza a chorrear. La velocidad mínima protege contra esto. Una "
+"El \"Tiempo mínimo por capa\" puede hacer que la impresión se ralentice tanto que "
+"el extrusor empieza a chorrear. La \" Velocidad mínima\"  protege contra esto. Una "
 "impresión ralentizada nunca será más lenta que esta velocidad mínima."
 
 #: Cura/util/profile.py:231
@@ -2391,33 +2387,33 @@ msgid ""
 "Lift the head if the minimal speed is hit because of cool slowdown, and wait "
 "the extra time so the minimal layer time is always hit."
 msgstr ""
-"Levante o aleja el cabezal extrusor si la velocidad mínima es alcanzada."
+"Levanta o aleja el cabezal extrusor si la velocidad mínima es alcanzada."
 "Además espera el tiempo extra para alcanzar el tiempo mínimo por capa "
 
 
 #: Cura/util/profile.py:232
 msgid "Solid infill top"
-msgstr "Relleno solido superior"
+msgstr "Relleno sólido superior"
 
 #: Cura/util/profile.py:232
 msgid ""
 "Create a solid top surface, if set to false the top is filled with the fill "
 "percentage. Useful for cups/vases."
 msgstr ""
-"Crea una superficie superior solidad, si esta desactivado se rellena con el "
-"porcentaje de rellon. Util para vaso y tazas."
+"Crea una superficie superior solida. Si esta desactivado se rellena con el "
+"porcentaje de relleno."
 
 #: Cura/util/profile.py:233
 msgid "Solid infill bottom"
-msgstr "Relleno solido inferior"
+msgstr "Relleno sólido inferior"
 
 #: Cura/util/profile.py:233
 msgid ""
 "Create a solid bottom surface, if set to false the bottom is filled with the "
 "fill percentage. Useful for buildings."
 msgstr ""
-"Crea una superficie solida inferior, si se desactiva la capa inferior se "
-"realiza con el porc. del relleno. Útil para edificios."
+"Crea una superficie solida inferior. Si está desactivado se rellena con el "
+"porcentaje de relleno."
 
 #: Cura/util/profile.py:234
 msgid "Infill overlap (%)"
@@ -2428,8 +2424,25 @@ msgid ""
 "Amount of overlap between the infill and the walls. There is a slight overlap "
 "with the walls and the infill so the walls connect firmly to the infill."
 msgstr ""
-"Cantidad de superposicion entre el relleno y las paredes. Un ligera "
-"superposición entre paredes y relleno conecta firmemente ambas."
+"Superposición entre el relleno y las paredes. Un ligera "
+"superposición entre paredes y relleno aumenta la resistencia de la pieza."
+
+#: Cura/util/profile.py:
+msgid "Infill prints after perimeters"
+msgstr "Imprimir relleno después de perímetro"
+
+#: Cura/util/profile.py:
+msgid ""
+"Print infill after perimeter lines. This can reduce infill from showing"
+"through the surface. If not checked, infill will print before perimeter"
+"lines."
+msgstr ""
+"Esto puede reducir que se vea el relleno a través de la superficie "
+"(Si la superficie es fina). Generalmente conviene imprimir el relleno"
+"primero si es que tenemos superficies inclinadas con ángulos negativos."
+
+
+
 
 #: Cura/util/profile.py:235
 msgid "Structure type"
@@ -2443,12 +2456,10 @@ msgid ""
 "Lines are single walled lines that break off one at a time. Which is more work "
 "to remove, but as it is less strong it does work better on tricky prints."
 msgstr ""
-"El tipo de estructura de soporte.\n"
-"Grilla es muy fuerte y puede salir en 1 pieza, sin embargo, a veces es "
-"demasiado fuerte.\n"
-"Las líneas son líneas de pared única que se desprenden de una en una. ¿Qué es "
-"más trabajo para eliminar, pero ya que es menos fuerte que funcionara mejor en "
-"impresiones difíciles."
+"Tipo de estructura de soporte.\n"
+"Grilla es muy fuerte pero aveces resulta dificil sacarla.\n"
+"Las líneas son líneas de pared única que se desprenden facilmente, aunque"
+"aveces pueden fallar al sostener en algunas zonas"
 
 #: Cura/util/profile.py:236
 msgid "Overhang angle for support (deg)"
@@ -2459,7 +2470,7 @@ msgid ""
 "The minimal angle that overhangs need to have to get support. With 90 degree "
 "being horizontal and 0 degree being vertical."
 msgstr ""
-"El ángulo mínimo que voladizos hay que tener para obtener apoyo. Con 90 grados "
+"El ángulo mínimo de voladizos que hay que tener para obtener apoyo. 90 grados "
 "de ser horizontal y 0 grados verticales."
 
 #: Cura/util/profile.py:237
@@ -2500,7 +2511,7 @@ msgid ""
 msgstr ""
 "Distancia desde la parte superior/inferior del soporte a la impresión. Un "
 "pequeño espacio aquí hace que sea más fácil de quitar el apoyo, pero hace que "
-"la impresión mas fea.\n"
+"la impresión quede de peor calidad.\n"
 "0,15 mm da una buena separación del material de soporte."
 
 #: Cura/util/profile.py:240 Cura/util/profile.py:241
