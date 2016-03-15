@@ -192,14 +192,20 @@ class mainWindow(wx.Frame):
 		self.menubar.Append(expertMenu, _("Expert"))
 
 		helpMenu = wx.Menu()
+		
+		# MAXI: Se agrega la pagina de soporte
 		i = helpMenu.Append(-1, _("Online documentation..."))
-		self.Bind(wx.EVT_MENU, lambda e: webbrowser.open('http://daid.github.com/Cura'), i)
-		i = helpMenu.Append(-1, _("Report a problem..."))
-		self.Bind(wx.EVT_MENU, lambda e: webbrowser.open('https://github.com/daid/Cura/issues'), i)
-		i = helpMenu.Append(-1, _("Check for update..."))
-		self.Bind(wx.EVT_MENU, self.OnCheckForUpdate, i)
-		i = helpMenu.Append(-1, _("Open YouMagine website..."))
-		self.Bind(wx.EVT_MENU, lambda e: webbrowser.open('https://www.youmagine.com/'), i)
+		#self.Bind(wx.EVT_MENU, lambda e: webbrowser.open('http://daid.github.com/Cura'), i)
+		self.Bind(wx.EVT_MENU, lambda e: webbrowser.open('https://soporte-trimaker.zendesk.com/hc/es/sections/202105368-Utilizando-CURA'), i)
+		
+		# MAXI: Se sacan algunos menues  
+		#i = helpMenu.Append(-1, _("Report a problem..."))
+		#self.Bind(wx.EVT_MENU, lambda e: webbrowser.open('https://github.com/daid/Cura/issues'), i)
+		#i = helpMenu.Append(-1, _("Check for update..."))
+		#self.Bind(wx.EVT_MENU, self.OnCheckForUpdate, i)
+		#i = helpMenu.Append(-1, _("Open YouMagine website..."))
+		#self.Bind(wx.EVT_MENU, lambda e: webbrowser.open('https://www.youmagine.com/'), i)
+		
 		i = helpMenu.Append(-1, _("About Cura..."))
 		self.Bind(wx.EVT_MENU, self.OnAbout, i)
 		self.menubar.Append(helpMenu, _("Help"))
@@ -493,6 +499,7 @@ class mainWindow(wx.Frame):
 		#Add tools for machines.
 		self.machineMenu.AppendSeparator()
 
+		
 		self.defaultFirmwareInstallMenuItem = self.machineMenu.Append(-1, _("Install default firmware..."))
 		self.Bind(wx.EVT_MENU, self.OnDefaultMarlinFirmware, self.defaultFirmwareInstallMenuItem)
 
