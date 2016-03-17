@@ -173,12 +173,16 @@ class printWindowPlugin(wx.Frame):
 
 	def script_cancelPrint(self, e):
 		# MAXI
-		self.line_fan_off  =  "M107" 
-		self.line_cold_bed =  "M190 S0" 
-		self.line_cold_ext =  "M109 S0"
-		self._printerConnection.sendCommand(line_fan_off)
-		self._printerConnection.sendCommand(line_cold_bed)
-		self._printerConnection.sendCommand(line_cold_ext)
+		#if type(line) != unicode:
+		#		line = unicode(line, 'utf-8', 'replace')
+		#self.line_fan_off  =  "M107" 
+		#self.line_cold_bed =  "M190 S0" 
+		#self.line_cold_ext =  "M109 S0"
+		#self._printerConnection.sendCommand(line_fan_off)
+		#self._printerConnection.sendCommand(line_cold_bed)
+		#self._printerConnection.sendCommand(line_cold_ext)
+		#line_2="M107; M190 S0; M109 S0;"
+		#script_sendGCode(self, data = line_2)
 		self._printerConnection.cancelPrint()
 
 	def script_pausePrint(self, e):
@@ -415,6 +419,13 @@ class printWindowBasic(wx.Frame):
 		self._printerConnection.startPrint()
 
 	def OnCancel(self, e):
+		#MAXI
+		self.line_fan_off  =  "M107" 
+		self.line_cold_bed =  "M190 S0" 
+		self.line_cold_ext =  "M109 S0"
+		self._printerConnection.sendCommand(line_fan_off)
+		self._printerConnection.sendCommand(line_cold_bed)
+		self._printerConnection.sendCommand(line_cold_ext)
 		self._printerConnection.cancelPrint()
 
 	def OnPause(self, e):
