@@ -183,11 +183,17 @@ class mainWindow(wx.Frame):
 		i = expertMenu.Append(-1, _("Open expert settings...\tCTRL+E"))
 		self.normalModeOnlyItems.append(i)
 		self.Bind(wx.EVT_MENU, self.OnExpertOpen, i)
-		expertMenu.AppendSeparator()
-		self.bedLevelWizardMenuItem = expertMenu.Append(-1, _("Run bed leveling wizard..."))
-		self.Bind(wx.EVT_MENU, self.OnBedLevelWizard, self.bedLevelWizardMenuItem)
-		self.headOffsetWizardMenuItem = expertMenu.Append(-1, _("Run head offset wizard..."))
-		self.Bind(wx.EVT_MENU, self.OnHeadOffsetWizard, self.headOffsetWizardMenuItem)
+		
+		# MAXI: Se retira el separador
+		#expertMenu.AppendSeparator()
+		
+		# MAXI: Se saca bedLevelWizardMenuItem
+		#self.bedLevelWizardMenuItem = expertMenu.Append(-1, _("Run bed leveling wizard..."))
+		#self.Bind(wx.EVT_MENU, self.OnBedLevelWizard, self.bedLevelWizardMenuItem)
+		
+		# MAXI: Se saca headOffsetWizardMenuItem
+		#self.headOffsetWizardMenuItem = expertMenu.Append(-1, _("Run head offset wizard..."))
+		#self.Bind(wx.EVT_MENU, self.OnHeadOffsetWizard, self.headOffsetWizardMenuItem)
 
 		self.menubar.Append(expertMenu, _("Expert"))
 
@@ -392,11 +398,15 @@ class mainWindow(wx.Frame):
 			# Enabled sash
 			self.splitter.SetSashSize(4)
 		self.defaultFirmwareInstallMenuItem.Enable(firmwareInstall.getDefaultFirmware() is not None)
-		if profile.getMachineSetting('machine_type').startswith('ultimaker2'):
-			self.bedLevelWizardMenuItem.Enable(False)
-			self.headOffsetWizardMenuItem.Enable(False)
-		if int(profile.getMachineSetting('extruder_amount')) < 2:
-			self.headOffsetWizardMenuItem.Enable(False)
+		
+		# MAXI: Se saca bedLevelWizardMenuItem (Ver mas arriba tambien)
+		#if profile.getMachineSetting('machine_type').startswith('ultimaker2'):
+		#	self.bedLevelWizardMenuItem.Enable(False)
+		#	self.headOffsetWizardMenuItem.Enable(False)
+		
+		# MAXI: Se saca headOffsetWizardMenuItem (Ver mas arriba tambien)
+		#if int(profile.getMachineSetting('extruder_amount')) < 2:
+		#	self.headOffsetWizardMenuItem.Enable(False)
 		self.scene.updateProfileToControls()
 		self.scene._scene.pushFree()
 
