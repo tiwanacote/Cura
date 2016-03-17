@@ -172,6 +172,13 @@ class printWindowPlugin(wx.Frame):
 		self._printerConnection.startPrint()
 
 	def script_cancelPrint(self, e):
+		# MAXI
+		self.line_fan_off  =  "M107" 
+		self.line_cold_bed =  "M190 S0" 
+		self.line_cold_ext =  "M109 S0"
+		self._printerConnection.sendCommand(line_fan_off)
+		self._printerConnection.sendCommand(line_cold_bed)
+		self._printerConnection.sendCommand(line_cold_ext)
 		self._printerConnection.cancelPrint()
 
 	def script_pausePrint(self, e):
