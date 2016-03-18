@@ -967,7 +967,9 @@ class SceneView(openglGui.glGuiPanel):
 	def _init3DView(self):
 		# set viewing projection
 		size = self.GetSize()
+		
 		glViewport(0, 0, size.GetWidth(), size.GetHeight())
+				
 		glLoadIdentity()
 
 		glLightfv(GL_LIGHT0, GL_POSITION, [0.2, 0.2, 1.0, 0.0])
@@ -1094,6 +1096,8 @@ class SceneView(openglGui.glGuiPanel):
 				self._objectOverhangShader = openglHelpers.GLFakeShader()
 				self._objectLoadShader = None
 		self._init3DView()
+		
+		
 		glTranslate(0,0,-self._zoom)
 		glRotate(-self._pitch, 1,0,0)
 		glRotate(self._yaw, 0,0,1)

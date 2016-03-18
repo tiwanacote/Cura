@@ -420,13 +420,19 @@ class printWindowBasic(wx.Frame):
 
 	def OnCancel(self, e):
 		#MAXI
-		self.line_fan_off  =  "M107" 
-		self.line_cold_bed =  "M190 S0" 
-		self.line_cold_ext =  "M109 S0"
-		self._printerConnection.sendCommand(line_fan_off)
-		self._printerConnection.sendCommand(line_cold_bed)
-		self._printerConnection.sendCommand(line_cold_ext)
+		#self.line_fan_off  =  "M107" 
+		#self.line_cold_bed =  "M190 S0" 
+		#self.line_cold_ext =  "M109 S0"
+		#self._printerConnection.sendCommand('M107')
+		#self._printerConnection.sendCommand('M190 S0')
+		#self._printerConnection.sendCommand('M109 S0')
+		
 		self._printerConnection.cancelPrint()
+		self._printerConnection.openActiveConnection()
+		self._printerConnection.sendCommand('M107')
+		self._printerConnection.sendCommand('M190 S0')
+		self._printerConnection.sendCommand('M109 S0')
+		self._printerConnection.closeActiveConnection()
 
 	def OnPause(self, e):
 		self._printerConnection.pause(not self._printerConnection.isPaused())
