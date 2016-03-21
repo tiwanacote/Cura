@@ -176,8 +176,9 @@ class CuraApp(wx.App):
 		dlg.ShowModal()
 		dlg.Destroy()
 
-		if self.new_version_dialog is not None:
-			self.new_version_dialog.Show()
+		# MAXI: Comentado para que no muestra la ventana de nueva version
+		#if self.new_version_dialog is not None:
+		#	self.new_version_dialog.Show()
 
 if platform.system() == "Darwin": #Mac magic. Dragons live here. THis sets full screen options.
 	try:
