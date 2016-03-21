@@ -139,11 +139,36 @@ class simpleModePanel(wx.Panel):
 			self._print_material_options.append(button)
 			if profile.getPreference('simpleModeMaterial') == name:
 				button.SetValue(True)
+		
+		# MAXI : Hago que ponga los botones de ABS y PLA en espanol. Saco otro boton de otro material que no conocemos
+		#button = wx.RadioButton(printMaterialPanel, -1, 'ABS', style=wx.RB_GROUP if len(self._print_material_options) == 0 else 0)
+		#button.name = 'ABS'
+		#self._print_material_options.append(button)
+		#if profile.getPreference('simpleModeMaterial') == 'ABS':
+			#button.SetValue(True)
+			
+		#button = wx.RadioButton(printMaterialPanel, -1, 'PLA', style=wx.RB_GROUP if len(self._print_material_options) == 0 else 0)
+		#button.name = 'PLA'
+		#self._print_material_options.append(button)
+		#if profile.getPreference('simpleModeMaterial') == 'PLA':
+			#button.SetValue(True)
+		#------		
+				
 
 		printTypePanel = wx.Panel(self)
 		for name in self._profile_manager.getProfileNames():
+				
 			button = wx.RadioButton(printTypePanel, -1, name, style=wx.RB_GROUP if len(self._print_profile_options) == 0 else 0)
+			
 			button.name = name
+			
+			# MAXI : Agrego para que si el lenguaje esta en espanol cambie estas cosas
+			#if name == "Fast print" and profile.getPreference('language') == 'Spanish':
+				#name = "Impresion rapida"
+				#button.name = name
+			#else:
+				#button.name = name
+		
 			self._print_profile_options.append(button)
 			if profile.getPreference('simpleModeProfile') == name:
 				button.SetValue(True)
