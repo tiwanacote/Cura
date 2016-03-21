@@ -158,7 +158,8 @@ class CuraApp(wx.App):
 		self.new_version_dialog = None
 		if profile.getPreference('last_run_version') != version.getVersion(False):
 			profile.putPreference('last_run_version', version.getVersion(False))
-			self.new_version_dialog = newVersionDialog.newVersionDialog().Show()
+			# MAXI: Comentado para que no muestra la ventana de nueva version (Se hizo esto para MacOS tambien) 
+			#self.new_version_dialog = newVersionDialog.newVersionDialog().Show()
 
 		setFullScreenCapable(self.mainWindow)
 
