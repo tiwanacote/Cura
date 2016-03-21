@@ -33,7 +33,10 @@ except:
 
 class mainWindow(wx.Frame):
 	def __init__(self):
-		super(mainWindow, self).__init__(None, title='Cura - ' + version.getVersion())
+		
+		# Maxi : Se agrega sobre la barra superior titulo nuevo
+		#super(mainWindow, self).__init__(None, title='Cura - ' + version.getVersion())
+		super(mainWindow, self).__init__(None, title='Trimaker Cosmos - Cura -  ' + version.getVersion())
 
 		wx.EVT_CLOSE(self, self.OnClose)
 
