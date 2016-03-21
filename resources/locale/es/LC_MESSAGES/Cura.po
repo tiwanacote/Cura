@@ -1370,6 +1370,23 @@ msgstr "Material:"
 msgid "Other:"
 msgstr "Otro:"
 
+# Maxi: Pantalla de impresion rapida
+#: Cura/gui/simpleMode.py:160
+msgid "Fast print"
+msgstr "Impresión ráp."
+
+msgid "Normal print"
+msgstr "Impresión normal"
+msgid "High quality"
+msgstr "Alta calidad"
+msgid "Ulti quality"
+msgstr "Ultra calidad"
+msgid "Platform adhesion"
+msgstr "Adhesión a plataforma"
+msgid "Profile:"
+msgstr "Perfil:"
+
+
 #: Cura/gui/tools/imageToMesh.py:28
 msgid "Height (mm)"
 msgstr "Espesor de capa (mm)"
