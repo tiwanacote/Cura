@@ -1665,7 +1665,7 @@ msgstr "Relleno"
 
 #: Cura/util/profile.py:181
 msgid "Bottom/Top thickness (mm)"
-msgstr "Espesor superior e inferior"
+msgstr "Espesor superior e inferior (mm)"
 
 #: Cura/util/profile.py:181
 msgid ""
@@ -2624,7 +2624,7 @@ msgid ""
 "When you are using the raft this is the width of the base layer lines which "
 "are put down."
 msgstr ""
-"Cuando se utiliza la balsa es el ancho de la capa de balsa que es puesta abajo."
+"Cuando se utiliza la balsa es el ancho de las lineas de balsa que es puesta abajo."
 
 #: Cura/util/profile.py:248
 msgid "Interface thickness (mm)"
@@ -2652,7 +2652,7 @@ msgstr ""
 
 #: Cura/util/profile.py:250
 msgid "Airgap"
-msgstr "Capa liviana"
+msgstr "Capa liviana (mm)"
 
 #: Cura/util/profile.py:250
 msgid "Gap between the last layer of the raft the whole print."
@@ -2660,7 +2660,7 @@ msgstr "Brecha entre la última capa de boceto (raft) que toda la impresión."
 
 #: Cura/util/profile.py:251
 msgid "First Layer Airgap"
-msgstr "Primero capa liviana"
+msgstr "Primera capa liviana (mm)"
 
 #: Cura/util/profile.py:251
 msgid ""
@@ -2671,19 +2671,19 @@ msgstr ""
 "Brecha entre la última capa de el borrador (raft) y la primera capa de "
 "impresión. Un pequeño espacio de 0,2mm hace maravillas en PLA y hace que el "
 "borrador (raft) fácil de quitar. Este valor se añade encima del parámetro de "
-"\"dispersión superficial\"."
+"\"Capa liviana\"."
 
 #: Cura/util/profile.py:252
 msgid "Surface layers"
-msgstr "Capa de superficie"
+msgstr "Capas de superficie"
 
 #: Cura/util/profile.py:252
 msgid ""
 "Amount of surface layers put on top of the raft, these are fully filled layers "
 "on which the model is printed."
 msgstr ""
-"Importe de las capas superficiales, situadas una encima del boceto (raft), "
-"estos son totalmente capas llenas en la que se imprime el modelo."
+"Cantidad de superficies llenas al 100% puestas sobre el \"Borrador\"  "
+"Estos son capas totalmente llenas en la que se imprime el modelo."
 
 #: Cura/util/profile.py:253
 msgid "Surface layer thickness (mm)"
@@ -2718,10 +2718,10 @@ msgid ""
 "model normals and tries to keep some internal holes intact. Type-B ignores all "
 "internal holes and only keeps the outside shape per layer."
 msgstr ""
-"Esta opción experta agrega todas las partes del modelo en conjunto. El "
+"Esta opción agrega todas las partes del modelo en un solo conjunto. El "
 "resultado suele ser que las cavidades internas desaparecen. Dependiendo del "
-"modelo de esto puede requerido o no. La activación de esta opción es a su "
-"propio riesgo. Tipo-A se depende de los modelos normales y trata de mantener "
+"modelo esto puede ser requerido o no. "
+"Tipo-A depende de las normales de los modelos y trata de mantener "
 "algunos agujeros internos intactos. Tipo-B ignora todos los agujeros internos "
 "y sólo mantiene la forma exterior por capa."
 
@@ -2745,12 +2745,12 @@ msgid ""
 msgstr ""
 "Esta opción experto mantiene todos los agujeros del modelo intactos. "
 "Normalmente Cura intenta suturar pequeños agujeros y eliminar todo en los "
-"grandes , pero esta opción mantiene agujeros que no son propiamente parte de "
-"nada y sólo va con lo que se deja. Esta opción no suele ser lo que quieras, "
-"pero podría permitir que usted rebane modelos que de lo contrario resultarían "
+"grandes, pero esta opción mantiene agujeros que no son propiamente parte de "
+"nada. Esta opción seguramente no suele ser lo que quieras, "
+"pero podría permitir que usted procese modelos que de lo contrario resultarían "
 "fallidos.\n"
 "Al igual que con todos los \"Correjir horribles \"  los resultados pueden "
-"variar y usar a su propio riesgo."
+"variar y debe usarse bajo su propio riesgo."
 
 #: Cura/util/profile.py:258
 msgid "Extensive stitching"
