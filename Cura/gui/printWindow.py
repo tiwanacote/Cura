@@ -415,7 +415,7 @@ class printWindowBasic(wx.Frame):
 		self._printerConnection.sendCommand('M107')
 		self._printerConnection.sendCommand('M190 S0')
 		self._printerConnection.sendCommand('M109 S0')
-		self._printerConnection.sendCommand('G01 Z130 F3600')
+		#self._printerConnection.sendCommand('G01 Z130 F3600') Se saca porque al resetear debería ir a home
 		self._printerConnection.closeActiveConnection()
 
 	def OnPause(self, e):
