@@ -139,7 +139,7 @@ msgstr "Alto de la máquina (mm)"
 
 #: Cura/gui/configWizard.py:392 Cura/util/profile.py:183
 msgid "Nozzle size (mm)"
-msgstr "Tamaño boquilla (mm)"
+msgstr "Tamaño de boquilla (mm)"
 
 #: Cura/gui/configWizard.py:393 Cura/util/profile.py:534
 msgid "Heated bed"
@@ -1716,7 +1716,7 @@ msgstr ""
 #: Cura/util/profile.py:187 Cura/util/profile.py:188 Cura/util/profile.py:189
 #: Cura/util/profile.py:190
 msgid "Speed and Temperature"
-msgstr "Velocidad  "
+msgstr "Velocidad y temperaturas  "
 
 #: Cura/util/profile.py:184
 msgid "Print speed (mm/s)"
@@ -2254,7 +2254,7 @@ msgstr ""
 
 #: Cura/util/profile.py:220
 msgid "Inner shell speed (mm/s)"
-msgstr "Velocidad del relleno interno (mm/s)"
+msgstr "Velocidad del borde interno (mm/s)"
 
 #: Cura/util/profile.py:220
 msgid ""
@@ -2263,7 +2263,7 @@ msgid ""
 "printing time. It is good to set this somewhere in between the outer shell "
 "speed and the infill/printing speed."
 msgstr ""
-"Velocidad a la que son impresos los rellenos. Si dejas 0 se usara la velocidad "
+"Velocidad a la que son impresos el borde interno. Si dejas 0 se usara la velocidad "
 "de impresión. Imprimir los rellenos más rápido puede reducir mucho el tiempo "
 "de impresión, pero puede puede afectar negativamente la calidad."
 
