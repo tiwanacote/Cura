@@ -1348,7 +1348,7 @@ msgstr "Reiniciar todos los objetos transformados"
 
 #: Cura/gui/sceneView.py:1001
 msgid "Toolpath to SD"
-msgstr "Trazadpo a SD"
+msgstr "Enviar a SD"
 
 #: Cura/gui/sceneView.py:1295
 msgid "Overhang view not working due to lack of OpenGL shaders support."
