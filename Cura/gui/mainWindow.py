@@ -675,12 +675,11 @@ class mainWindow(wx.Frame):
 		
 		#Todo comentado por MAXI
 		#newVersion = version.checkForNewerVersion()  
-		
 		newVersion = None  # Agregado por MAXI para evitar que compruebe las nuevas versiones
 		
-		#if newVersion is not None:
-		#	if wx.MessageBox(_("A new version of Cura is available, would you like to download?"), _("New version available"), wx.YES_NO | wx.ICON_INFORMATION) == wx.YES:
-		#		webbrowser.open(newVersion)
+		if newVersion is not None:
+			if wx.MessageBox(_("A new version of Cura is available, would you like to download?"), _("New version available"), wx.YES_NO | wx.ICON_INFORMATION) == wx.YES:
+				webbrowser.open(newVersion)
 		#else:
 		#	wx.MessageBox(_("You are running the latest version of Cura!"), _("Awesome!"), wx.ICON_INFORMATION)
 

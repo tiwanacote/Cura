@@ -138,7 +138,11 @@ class CuraApp(wx.App):
 			configWizard.ConfigWizard()
 
 		if profile.getPreference('check_for_updates') == 'True':
-			newVersion = version.checkForNewerVersion()
+			
+			# MAXI : Hago newVersion = None para que no revise nuevas versiones
+			#newVersion = version.checkForNewerVersion()
+			newVersion = None
+			
 			if newVersion is not None:
 				if self.splash is not None:
 					self.splash.Show(False)
