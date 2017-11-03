@@ -8,7 +8,7 @@ Versions up from 13.05 are based on a C++ engine called CuraEngine.
 """
 __copyright__ = "Copyright (C) 2013 David Braam - Released under terms of the AGPLv3 License"
 
-# MAXI: Es una forma de establecer las variables de entorno.
+# MAXI: Es una forma de establecer las variables de entorno
 import sys
 if "C:\\Users\Maximiliano\Documents\GitHub\Cura" not in sys.path:
     sys.path.append("C:\\Users\Maximiliano\Documents\GitHub\Cura")
