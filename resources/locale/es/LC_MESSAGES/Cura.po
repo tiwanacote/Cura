@@ -570,6 +570,10 @@ msgstr ""
 "Ajustar la izquierda el tornillo posterior de la impresora cama \n"
 "De modo que boquilla sólo golpea la cama."
 
+#: Cura/gui/mainWindow.py:194
+msgid "Autoleveling sensor configuration"
+msgstr "Configurar sensor de nivelación automática"
+
 #: Cura/gui/configWizard.py:1274
 msgid ""
 "Adjust the back right screw of your printer bed\n"
@@ -577,6 +581,86 @@ msgid ""
 msgstr ""
 "Ajustar el tornillo posterior derecha de la impresora cama \n"
 "De modo que la boquilla sólo golpea la cama."
+
+#: Cura/gui/configWizard.py:1608 Cura/gui/configWizard.py:1119
+msgid "Sensor calibration"
+msgstr "Calibración del sensor"
+
+#: Cura/gui/configWizard.py:1119
+msgid "Sensor configuration"
+msgstr "Configuración del sensor"
+
+#: Cura/gui/configWizard.py:1121
+msgid "This window will calibrate the leveling sensor. Make sure the printer is connected to the PC with the cable and turned on."
+msgstr "Esta ventana lo guiará en la calibración del sensor de nivelación. Asegúrese que la impresora esté encendida y conectada a la PC con el cable USB."
+
+#: Cura/gui/configWizard.py:1123
+msgid "Follow next steps:"
+msgstr "Siga los siguientes pasos:"
+
+#: Cura/gui/configWizard.py:1363
+msgid "Successful connection"
+msgstr "Conexión exitosa."
+
+#: Cura/gui/configWizard.py:1124
+msgid "1. Click on Connect to Cosmos II."
+msgstr "1. Haga click en \"Conectar Cosmos II\"."
+
+#: Cura/gui/configWizard.py:1129
+msgid "2. To start the calibration select Position, the print head will go to the origin"
+msgstr "2. Para comenzar la calibración seleccionar \"Posicionar\", el cabezal de impresión se dirigirá al origen"
+
+#: Cura/gui/configWizard.py:1130
+msgid "    and then to the position where the calibration will be made."
+msgstr "    y luego a la posición en la que se realizará la calibración."
+
+#: Cura/gui/configWizard.py:1133
+msgid "3. Wait for the printer to stop to begin this step."
+msgstr "3. Espere que la impresora se detenga para comenzar este paso."
+
+#: Cura/gui/configWizard.py:1134
+msgid "    Place the calibration paper under the nozzle to check if the distance is correct."
+msgstr "    Coloque el papel de calibración debajo de la boquilla para verificar si la distancia es correcta. "
+
+#: Cura/gui/configWizard.py:1135
+msgid "    The paper should pass between the platform and the mouthpiece, and a slight friction can be felt when moving it, without wrinkling or tearing."
+msgstr "    El papel debe pasar entre la plataforma y la boquilla pudiéndose sentir una pequeña fricción al moverlo, sin arrugarse o desgarrarse."
+
+#: Cura/gui/configWizard.py:1136
+msgid  "    If you notice that the distance is too large or too small, you should correct it by using the buttons below."
+msgstr "    Si nota que la distancia es demasiado grande o pequeña, debera corregirlo usando los botones que se encuentran debajo."
+
+#: Cura/gui/configWizard.py:1139
+msgid "4. To finish select \"Save calibration\", once the printer stops, you can finish the calibration."
+msgstr "4. Para finalizar seleccione \"Guardar calibración\", una vez que se detenga la impresora puede finalizar."
+
+#: Cura/gui/configWizard.py:1131
+msgid "Connect to Cosmos II"
+msgstr "Conectar con Cosmos II"
+
+#: Cura/gui/configWizard.py:1130
+msgid "Position"
+msgstr "Posicionar"
+
+#: Cura/gui/configWizard.py:1137
+msgid "Start"
+msgstr "Comenzar"
+
+#: Cura/gui/configWizard.py:1136
+msgid "Up 0.1mm"
+msgstr "Acercar ↑"
+
+#: Cura/gui/configWizard.py:1136
+msgid "Down 0.1mm"
+msgstr "Alejar ↓"
+
+#: Cura/gui/configWizard.py:1139
+msgid "Save calibration"
+msgstr "Guardar calibración"
+
+#: Cura/gui/configWizard.py:1170
+msgid "Conecting Cosmos II"
+msgstr "Conectado con Cosmos II..."
 
 #: Cura/gui/configWizard.py:1278
 msgid ""
@@ -879,7 +963,7 @@ msgstr "Abrir ajustes experto...\tCTRL+E"
 
 #: Cura/gui/mainWindow.py:184
 msgid "Run bed leveling wizard..."
-msgstr "Iniciar asistente para calibración de la cama..."
+msgstr "Iniciar nivelación de la cama"
 
 #: Cura/gui/mainWindow.py:186
 msgid "Run head offset wizard..."
@@ -1141,9 +1225,7 @@ msgstr ""
 "Más líneas de distribución\n"
 "Más líneas de diseño"
 
-#: Cura/gui/printWindow.py:336
-msgid "Connect"
-msgstr "Conectar"
+
 
 #: Cura/gui/printWindow.py:338 Cura/gui/sceneView.py:66
 msgid "Print"
@@ -2495,7 +2577,7 @@ msgid "Fill amount (%)"
 msgstr "Densidad de relleno (%)"
 
 #: Cura/util/profile.py:237
-#, python-format
+
 msgid ""
 "Amount of infill structure in the support material, less material gives weaker "
 "support which is easier to remove. 15% seems to be a good average."
@@ -3091,12 +3173,12 @@ msgstr ""
 "mm para un Ultimaker."
 
 #: Cura/util/profile.py:557
-#, python-format
+
 msgid "More flow than 150% is rare and usually not recommended."
 msgstr "Flujo mayor al 150% es poco frecuente y por lo general no se recomienda."
 
 #: Cura/util/profile.py:558
-#, python-format
+
 msgid "Less flow than 50% is rare and usually not recommended."
 msgstr "Flujo menor al 50% es poco frecuente y por lo general no se recomienda."
 

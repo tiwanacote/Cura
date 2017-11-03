@@ -1,5 +1,6 @@
+#-*- coding: utf-8 -*-
 __copyright__ = "Copyright (C) 2013 David Braam - Released under terms of the AGPLv3 License"
-
+ 
 import os
 import webbrowser
 import threading
@@ -16,6 +17,7 @@ from Cura.util import profile
 from Cura.util import gcodeGenerator
 from Cura.util import resources
 
+cnt = 0
 
 class InfoBox(wx.Panel):
 	def __init__(self, parent):
@@ -780,7 +782,7 @@ class UltimakerCheckupPage(InfoPage):
 			wx.CallAfter(self.machineState.SetLabel, _("Communication State: %s") % (self.comm.getStateString()))
 		elif self.comm.isError():
 			wx.CallAfter(self.commState.SetBitmap, self.crossBitmap)
-			wx.CallAfter(self.infoBox.SetError, _("Failed to establish connection with the printer."), 'http://wiki.ultimaker.com/Cura:_Connection_problems')
+			wx.CallAfter(self.infoBox.SetError, _("Failed to establish connection with the printer."), 'https://soporte-trimaker.zendesk.com/hc/es')
 			wx.CallAfter(self.endstopBitmap.Show, False)
 			wx.CallAfter(self.machineState.SetLabel, '%s' % (self.comm.getErrorString()))
 			wx.CallAfter(self.errorLogButton.Show, True)
@@ -1112,38 +1114,56 @@ class ConfigWizard(wx.wizard.Wizard):
 	def OnCancel(self, e):
 		profile.setActiveMachine(self._old_machine_index)
 
-class bedLevelWizardMain(InfoPage):
+class bedLevelWizardMain(InfoPage): #Rulo: Modifico para que sea el instructivo de calibracion de sensor
 	def __init__(self, parent):
-		super(bedLevelWizardMain, self).__init__(parent, _("Bed leveling wizard"))
+		super(bedLevelWizardMain, self).__init__(parent, _("Sensor calibration"))
 
-		self.AddText(_('This wizard will help you in leveling your printer bed'))
+		self.AddText(_("This window will calibrate the leveling sensor. Make sure the printer is connected to the PC with the cable and turned on."))
 		self.AddSeperator()
-		self.AddText(_('It will do the following steps'))
-		self.AddText(_('* Move the printer head to each corner'))
-		self.AddText(_('  and let you adjust the height of the bed to the nozzle'))
-		self.AddText(_('* Print a line around the bed to check if it is level'))
-		self.AddSeperator()
-
-		self.connectButton = self.AddButton(_('Connect to printer'))
+#		self.AddText(_('Follow next steps:'))
+		self.AddText(_('1. Click on Connect to Cosmos II.'))
+		self.connectButton = self.AddButton(_('Connect to Cosmos II'))
 		self.comm = None
-
 		self.infoBox = self.AddInfoBox()
-		self.resumeButton = self.AddButton(_('Resume'))
-		self.upButton, self.downButton = self.AddDualButton(_('Up 0.2mm'), _('Down 0.2mm'))
-		self.upButton2, self.downButton2 = self.AddDualButton(_('Up 10mm'), _('Down 10mm'))
-		self.resumeButton.Enable(False)
+		self.AddSeperator()
+		self.AddText(_('2. To start the calibration select Position, the print head will go to the origin'))
+		self.AddText(_('    and then to the position where the calibration will be made.'))
+		self.homeButton = self.AddButton(_('Position'))
+		self.AddSeperator()
+		self.AddText(_('3. Wait for the printer to stop to begin this step.'))
+		self.AddText(_('    Place the calibration paper under the nozzle to check if the distance is correct.'))
+		self.AddText(_('    The paper should pass between the platform and the mouthpiece, and a slight friction can be felt when moving it, without wrinkling or tearing.'))
+		self.AddText(_('    If you notice that the distance is too large or too small, you should correct it by using the buttons below.'))
+		self.upButton, self.downButton = self.AddDualButton(_('Up 0.1mm'), _('Down 0.1mm'))
+		self.AddSeperator()
+		self.AddText(_('4. To finish select "Save calibration", once the printer stops, you can finish the calibration.'))
+		self.endButton = self.AddButton(_('Save calibration'))
+				
+		#self.resumeButton = self.AddButton(_('Resume'))
+		
+		#self.startButton = self.AddButton(_('Start'))
+		#self.upButton, self.downButton = self.AddDualButton(_('Up 0.1mm'), _('Down 0.1mm'))
+		
+		#self.upButton2, self.downButton2 = self.AddDualButton(_('Up 10mm'), _('Down 10mm'))
+		#self.resumeButton.Enable(False)
 
+		self.homeButton.Enable(False)
+#		self.startButton.Enable(False)
 		self.upButton.Enable(False)
 		self.downButton.Enable(False)
-		self.upButton2.Enable(False)
-		self.downButton2.Enable(False)
+		self.endButton.Enable(False)
+#		self.upButton2.Enable(False)
+#		self.downButton2.Enable(False)
 
 		self.Bind(wx.EVT_BUTTON, self.OnConnect, self.connectButton)
-		self.Bind(wx.EVT_BUTTON, self.OnResume, self.resumeButton)
+		#self.Bind(wx.EVT_BUTTON, self.OnResume, self.resumeButton)
+		self.Bind(wx.EVT_BUTTON, self.OnHome, self.homeButton)
+#		self.Bind(wx.EVT_BUTTON, self.OnStart, self.startButton)
 		self.Bind(wx.EVT_BUTTON, self.OnBedUp, self.upButton)
 		self.Bind(wx.EVT_BUTTON, self.OnBedDown, self.downButton)
-		self.Bind(wx.EVT_BUTTON, self.OnBedUp2, self.upButton2)
-		self.Bind(wx.EVT_BUTTON, self.OnBedDown2, self.downButton2)
+		self.Bind(wx.EVT_BUTTON, self.OnEnd, self.endButton)
+		#self.Bind(wx.EVT_BUTTON, self.OnBedUp2, self.upButton2)
+		#self.Bind(wx.EVT_BUTTON, self.OnBedDown2, self.downButton2)
 
 	def OnConnect(self, e = None):
 		if self.comm is not None:
@@ -1154,32 +1174,65 @@ class bedLevelWizardMain(InfoPage):
 			return
 		self.connectButton.Enable(False)
 		self.comm = machineCom.MachineCom(callbackObject=self)
-		self.infoBox.SetBusy(_('Connecting to machine.'))
+		self.infoBox.SetBusy(_('Conecting Cosmos II')) #RULO: Cambio el texto para que quede mas personalizado
 		self._wizardState = 0
 
-	def OnBedUp(self, e):
-		feedZ = profile.getProfileSettingFloat('print_speed') * 60
-		self.comm.sendCommand('G92 Z10')
-		self.comm.sendCommand('G1 Z9.8 F%d' % (feedZ))
+	def OnHome(self, e):
+		global cnt
+		cnt = 0
+		self.comm.sendCommand('G28')
 		self.comm.sendCommand('M400')
+		self.comm.sendCommand('M851 Z0') #Seteo en 0 el offset
+		self.comm.sendCommand('M211 Z0 S0')#Habilito para ir a Z negativos
+		self.comm.sendCommand('M500')	#Guardo en EEPROM
+		self.comm.sendCommand('G1 X61 Y0 Z0')	#Llevo la boquilla a la altura del sensor
+		self.comm.sendCommand('M400')
+		self.upButton.Enable(True)
+		self.downButton.Enable(True)
+		self.homeButton.Enable(False)
+		self.endButton.Enable(True)
+	def OnBedUp(self, e):
+		global cnt
+		cnt = cnt - 0.1
+		Subo = "G1 Z" + str(cnt)
+		self.comm.sendCommand(Subo)
+		self.comm.sendCommand('M400')
+		#feedZ = profile.getProfileSettingFloat('print_speed') * 60
+		#self.comm.sendCommand('G92 Z10')
+		#self.comm.sendCommand('G1 Z9.8 F%d' % (feedZ))
+		#self.comm.sendCommand('M400')
 
 	def OnBedDown(self, e):
-		feedZ = profile.getProfileSettingFloat('print_speed') * 60
-		self.comm.sendCommand('G92 Z10')
-		self.comm.sendCommand('G1 Z10.2 F%d' % (feedZ))
+		global cnt
+		cnt = cnt + 0.1	
+		Bajo = "G1 Z" + str(cnt)
 		self.comm.sendCommand('M400')
+		self.comm.sendCommand(Bajo)
+		#feedZ = profile.getProfileSettingFloat('print_speed') * 60
+		#self.comm.sendCommand('G92 Z10')
+		#self.comm.sendCommand('G1 Z10.2 F%d' % (feedZ))
+		#self.comm.sendCommand('M400')
 
-	def OnBedUp2(self, e):
-		feedZ = profile.getProfileSettingFloat('print_speed') * 60
-		self.comm.sendCommand('G92 Z10')
-		self.comm.sendCommand('G1 Z0 F%d' % (feedZ))
-		self.comm.sendCommand('M400')
+	def OnEnd(self, e):
+		global cnt
+		offset = "M851 Z" + str(cnt)
+		self.comm.sendCommand(offset)
+		self.comm.sendCommand('M211 Z0 S1')				#Para que despues no pueda subir por encima del 0
+		self.comm.sendCommand('M500')
+		self.comm.sendCommand('G28')
+		cnt = 0
 
-	def OnBedDown2(self, e):
-		feedZ = profile.getProfileSettingFloat('print_speed') * 60
-		self.comm.sendCommand('G92 Z10')
-		self.comm.sendCommand('G1 Z20 F%d' % (feedZ))
-		self.comm.sendCommand('M400')
+#	def OnBedUp2(self, e):
+#		feedZ = profile.getProfileSettingFloat('print_speed') * 60
+#		self.comm.sendCommand('G92 Z10')
+#		self.comm.sendCommand('G1 Z0 F%d' % (feedZ))
+#		self.comm.sendCommand('M400')
+
+#	def OnBedDown2(self, e):
+#		feedZ = profile.getProfileSettingFloat('print_speed') * 60
+#		self.comm.sendCommand('G92 Z10')
+#		self.comm.sendCommand('G1 Z20 F%d' % (feedZ))
+#		self.comm.sendCommand('M400')
 
 	def AllowNext(self):
 		if self.GetParent().headOffsetCalibration is not None and int(profile.getMachineSetting('extruder_amount')) > 1:
@@ -1191,10 +1244,10 @@ class bedLevelWizardMain(InfoPage):
 		feedTravel = profile.getProfileSettingFloat('travel_speed') * 60
 		if self._wizardState == -1:
 			wx.CallAfter(self.infoBox.SetInfo, _('Homing printer...'))
-			wx.CallAfter(self.upButton.Enable, False)
-			wx.CallAfter(self.downButton.Enable, False)
-			wx.CallAfter(self.upButton2.Enable, False)
-			wx.CallAfter(self.downButton2.Enable, False)
+#			wx.CallAfter(self.upButton.Enable, False)
+#			wx.CallAfter(self.downButton.Enable, False)
+#			wx.CallAfter(self.upButton2.Enable, False)
+#			wx.CallAfter(self.downButton2.Enable, False)
 			self.comm.sendCommand('M105')
 			self.comm.sendCommand('G28')
 			self._wizardState = 1
@@ -1275,7 +1328,7 @@ class bedLevelWizardMain(InfoPage):
 
 			gcodeList.append('M400')
 			self.comm.printGCode(gcodeList)
-		self.resumeButton.Enable(False)
+#		self.resumeButton.Enable(False)
 
 	def mcLog(self, message):
 		print 'Log:', message
@@ -1284,28 +1337,28 @@ class bedLevelWizardMain(InfoPage):
 		if self._wizardState == 1:
 			self._wizardState = 2
 			wx.CallAfter(self.infoBox.SetAttention, _('Adjust the front left screw of your printer bed\nSo the nozzle just hits the bed.'))
-			wx.CallAfter(self.resumeButton.Enable, True)
+#			wx.CallAfter(self.resumeButton.Enable, True)
 		elif self._wizardState == 3:
 			self._wizardState = 4
 			if profile.getMachineSetting('has_heated_bed') == 'True':
 				wx.CallAfter(self.infoBox.SetAttention, _('Adjust the back screw of your printer bed\nSo the nozzle just hits the bed.'))
 			else:
 				wx.CallAfter(self.infoBox.SetAttention, _('Adjust the back left screw of your printer bed\nSo the nozzle just hits the bed.'))
-			wx.CallAfter(self.resumeButton.Enable, True)
+#			wx.CallAfter(self.resumeButton.Enable, True)
 		elif self._wizardState == 5:
 			self._wizardState = 6
 			wx.CallAfter(self.infoBox.SetAttention, _('Adjust the back right screw of your printer bed\nSo the nozzle just hits the bed.'))
-			wx.CallAfter(self.resumeButton.Enable, True)
+#			wx.CallAfter(self.resumeButton.Enable, True)
 		elif self._wizardState == 7:
 			self._wizardState = 8
 			wx.CallAfter(self.infoBox.SetAttention, _('Adjust the front right screw of your printer bed\nSo the nozzle just hits the bed.'))
-			wx.CallAfter(self.resumeButton.Enable, True)
+#			wx.CallAfter(self.resumeButton.Enable, True)
 		elif self._wizardState == 9:
 			if temp[0] < profile.getProfileSettingFloat('print_temperature') - 5:
 				wx.CallAfter(self.infoBox.SetInfo, _('Heating up printer: %d/%d') % (temp[0], profile.getProfileSettingFloat('print_temperature')))
 			else:
 				wx.CallAfter(self.infoBox.SetAttention, _('The printer is hot now. Please insert some PLA filament into the printer.'))
-				wx.CallAfter(self.resumeButton.Enable, True)
+#				wx.CallAfter(self.resumeButton.Enable, True)
 				self._wizardState = 10
 
 	def mcStateChange(self, state):
@@ -1313,12 +1366,15 @@ class bedLevelWizardMain(InfoPage):
 			return
 		if self.comm.isOperational():
 			if self._wizardState == 0:
-				wx.CallAfter(self.infoBox.SetAttention, _('Use the up/down buttons to move the bed and adjust your Z endstop.'))
-				wx.CallAfter(self.upButton.Enable, True)
-				wx.CallAfter(self.downButton.Enable, True)
-				wx.CallAfter(self.upButton2.Enable, True)
-				wx.CallAfter(self.downButton2.Enable, True)
-				wx.CallAfter(self.resumeButton.Enable, True)
+				wx.CallAfter(self.infoBox.SetAttention, _('Successful connection')) #RULO:Cambio el texto que aprece en el rectangulo amarillo
+#				wx.CallAfter(self.upButton.Enable, True)
+#				wx.CallAfter(self.downButton.Enable, True)
+#				wx.CallAfter(self.upButton2.Enable, True)
+#				wx.CallAfter(self.downButton2.Enable, True)
+#				wx.CallAfter(self.resumeButton.Enable, True)
+				wx.CallAfter(self.homeButton.Enable, True)		#RULO: Agrego estas lineas para que despues de apretar conect se habiliten
+#				wx.CallAfter(self.startButton.Enable, True)
+#				wx.CallAfter(self.endButton.Enable, True)
 				self._wizardState = -1
 			elif self._wizardState == 11 and not self.comm.isPrinting():
 				self.comm.sendCommand('G1 Z15 F%d' % (profile.getProfileSettingFloat('print_speed') * 60))
@@ -1331,7 +1387,7 @@ class bedLevelWizardMain(InfoPage):
 				wx.CallAfter(self.connectButton.Enable, True)
 				self._wizardState = 12
 		elif self.comm.isError():
-			wx.CallAfter(self.infoBox.SetError, _('Failed to establish connection with the printer.'), 'http://wiki.ultimaker.com/Cura:_Connection_problems')
+			wx.CallAfter(self.infoBox.SetError, _('Failed to establish connection with the printer.'), 'https://soporte-trimaker.zendesk.com/hc/es')
 
 	def mcMessage(self, message):
 		pass
@@ -1549,7 +1605,7 @@ class headOffsetCalibrationPage(InfoPage):
 					wx.CallAfter(self.resumeButton.SetFocus)
 
 		elif self.comm.isError():
-			wx.CallAfter(self.infoBox.SetError, _('Failed to establish connection with the printer.'), 'http://wiki.ultimaker.com/Cura:_Connection_problems')
+			wx.CallAfter(self.infoBox.SetError, _('Failed to establish connection with the printer.'), 'https://soporte-trimaker.zendesk.com/hc/es')
 
 	def mcMessage(self, message):
 		pass
@@ -1562,7 +1618,7 @@ class headOffsetCalibrationPage(InfoPage):
 
 class bedLevelWizard(wx.wizard.Wizard):
 	def __init__(self):
-		super(bedLevelWizard, self).__init__(None, -1, _("Bed leveling wizard"))
+		super(bedLevelWizard, self).__init__(None, -1, _("Sensor calibration")) #Rulo: Cambio titulo de la ventana
 
 		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGED, self.OnPageChanged)
 		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGING, self.OnPageChanging)

@@ -36,7 +36,7 @@ class mainWindow(wx.Frame):
 		
 		# Maxi : Se agrega sobre la barra superior titulo nuevo
 		#super(mainWindow, self).__init__(None, title='Cura - ' + version.getVersion())
-		super(mainWindow, self).__init__(None, title='Trimaker Cosmos - Cura - V2 -  ' + version.getVersion())
+		super(mainWindow, self).__init__(None, title='Trimaker Cosmos II - Cura - V3.0 -  ' + version.getVersion()) # RULO:  Es la Trimaker Cosmos II Version 3, la 2.0 serian de la Cosmos I
 
 		wx.EVT_CLOSE(self, self.OnClose)
 
@@ -188,11 +188,11 @@ class mainWindow(wx.Frame):
 		self.Bind(wx.EVT_MENU, self.OnExpertOpen, i)
 		
 		# MAXI: Se retira el separador
-		#expertMenu.AppendSeparator()
+		expertMenu.AppendSeparator()
 		
 		# MAXI: Se saca bedLevelWizardMenuItem
-		#self.bedLevelWizardMenuItem = expertMenu.Append(-1, _("Run bed leveling wizard..."))
-		#self.Bind(wx.EVT_MENU, self.OnBedLevelWizard, self.bedLevelWizardMenuItem)
+		self.bedLevelWizardMenuItem = expertMenu.Append(-1, _("Autoleveling sensor configuration")) #RULO: Cambio Run bed leveling wizard... para que se ajuste al sensor
+		self.Bind(wx.EVT_MENU, self.OnBedLevelWizard, self.bedLevelWizardMenuItem)
 		
 		# MAXI: Se saca headOffsetWizardMenuItem
 		#self.headOffsetWizardMenuItem = expertMenu.Append(-1, _("Run head offset wizard..."))
@@ -744,7 +744,7 @@ class normalSettingsPanel(configBase.configPanelBase):
 		else:
 			self.alterationPanel = alterationPanel.alterationPanel(self.nb, callback)
 			self.nb.AddPage(self.alterationPanel, "Start/End-GCode")
-
+			
 		self.Bind(wx.EVT_SIZE, self.OnSize)
 
 		self.nb.SetSize(self.GetSize())
