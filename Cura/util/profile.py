@@ -330,44 +330,33 @@ setting('object_center_y', -1, float, 'hidden', 'hidden')
 
 setting('start.gcode', """; TRIMAKER COSMOS II Start GCode
 
-G21      			; Metric values
-G90					; Absolute positioning
-M82      			; Set extruder to absolute mode                                	
-M104 s190 		; Voy calentando el extrusor hasta 190C 
-G28 				; Home axis
-
-G1 Z25 F200
-G1 X130 Y180 F2500	; Moves extruder to front left side of platform
-
-M190 S{print_bed_temperature}   ;Add your own bed temperature line
-M109 S{print_temperature}       ;Add your own temperature line
-
-G92 E0				; Zero the extruded length
-G1 F100 E1          ; Extrude 3mm of feed stock
-G92 E0              ; Zero the extruded length again
-  
-G1 X50 Z0 F200      ; Toca la plataforma para despegar el filamento que colgando
-G1 Z10 F200         ; A partir de aca arranca la rutina
-G1 F2000
-
-; Put printing message on LCD screen
-M117 Imprimiendo        
+G21
+G90        ;absolute positioning
+M82        ;set extruder to absolute mode
+M107       ;start with the fan off
+G28 X Y Z  ;move X/Y to min endstops
+G29
+G1 Z15.0 F7200 ;move the platform down 15mm
+G92 E0                  ;zero the extruded length
+G1 F200 E3              ;extrude 3mm of feed stock
+G92 E0                  ;zero the extruded length again
+G1 F7200
+;Put printing message on LCD screen
+M117 Printing...
+        
 
 """, str, 'alteration', 'alteration')
 #######################################################################################
 setting('end.gcode', """;End GCode
 
-G90 				; Set to absolute positioning
-G1 X0 Y0 Z130		; Get extruder out of way
-G92 E0			 	; Reset extruder position
-G1 E-1			; Reduce filament pressure
-G92 E0			; Reset extruder position again
-M140 S0 			; Disable heated bed
-M104 S0 			; Disable extruder
-M84 				; Turn steppers off
-M107			; Fan off 
-
-M117 Impresion finalizada
+M104 S0
+M140 S0                     ;heated bed heater off (if you have it)
+G01 X0 Y0 Z200                   ;move X/Y to min endstops
+ so the head is out of the way
+M84                         ;steppers off
+G90                         ;absolute positioning
+M190 S0.000000
+M109 S0.000000
 
 """, str, 'alteration', 'alteration')
 
