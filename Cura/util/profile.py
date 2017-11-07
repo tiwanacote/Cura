@@ -328,7 +328,7 @@ setting('object_center_y', -1, float, 'hidden', 'hidden')
 #;{profile_string}
 #""", str, 'alteration', 'alteration')
 
-setting('start.gcode', """; TRIMAKER COSMOS Start GCode
+setting('start.gcode', """; TRIMAKER COSMOS II Start GCode
 
 G21      			; Metric values
 G90					; Absolute positioning
