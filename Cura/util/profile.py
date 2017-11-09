@@ -361,7 +361,7 @@ M109 S0.000000
 """, str, 'alteration', 'alteration')
 
 #######################################################################################
-setting('start.gcode', """; TRIMAKER COSMOS Start GCode
+setting('start1.gcode', """; TRIMAKER COSMOS Start GCode
 G21      			; Metric values
 G28 				; Home axis
 G1 X0 Y0 Z15
@@ -380,7 +380,7 @@ G1 Z10 F200         ; A partir de aca arranca la rutina
 G1 F2000
 ; Put printing message on LCD screen
 M117 Imprimiendo
-""", str, 'alteration1', 'alteration1')
+""", str, 'alteration', 'alteration')
 #######################################################################################
 setting('end.gcode', """;End GCode
 G90 				; Set to absolute positioning
@@ -393,7 +393,7 @@ M104 S0 			; Disable extruder
 M84 				; Turn steppers off
 M107			; Fan off
 M117 Impresion finalizada
-""", str, 'alteration1', 'alteration1')
+""", str, 'alteration', 'alteration')
 #######################################################################################
 setting('start3.gcode', """;Sliced at: {day} {date} {time}
 ;Basic settings: Layer height: {layer_height} Walls: {wall_thickness} Fill: {fill_density}
