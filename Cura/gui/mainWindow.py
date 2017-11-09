@@ -36,7 +36,7 @@ class mainWindow(wx.Frame):
 		
 		# Maxi : Se agrega sobre la barra superior titulo nuevo
 		#super(mainWindow, self).__init__(None, title='Cura - ' + version.getVersion())
-		super(mainWindow, self).__init__(None, title='Trimaker Cosmos II - Cura - V3.0 -  ' + version.getVersion()) # RULO:  Es la Trimaker Cosmos II Version 3, la 2.0 serian de la Cosmos I
+		super(mainWindow, self).__init__(None, title='Trimaker Cosmos I I - Cura - V3.0 -  ' + version.getVersion()) # RULO:  Es la Trimaker Cosmos II Version 3, la 2.0 serian de la Cosmos I
 
 		wx.EVT_CLOSE(self, self.OnClose)
 

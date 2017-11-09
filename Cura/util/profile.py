@@ -361,52 +361,38 @@ M109 S0.000000
 """, str, 'alteration', 'alteration')
 
 #######################################################################################
-setting('start2.gcode', """;Sliced at: {day} {date} {time}
-;Basic settings: Layer height: {layer_height} Walls: {wall_thickness} Fill: {fill_density}
-;Print time: {print_time}
-;Filament used: {filament_amount}m {filament_weight}g
-;Filament cost: {filament_cost}
-;M190 S{print_bed_temperature} ;Uncomment to add your own bed temperature line
-;M104 S{print_temperature} ;Uncomment to add your own temperature line
-;M109 T1 S{print_temperature2} ;Uncomment to add your own temperature line
-;M109 T0 S{print_temperature} ;Uncomment to add your own temperature line
-G21        ;metric values
-G90        ;absolute positioning
-M107       ;start with the fan off
-
-G28 X0 Y0  ;move X/Y to min endstops
-G28 Z0     ;move Z to min endstops
-
-G1 Z15.0 F{travel_speed} ;move the platform down 15mm
-
-T1                      ;Switch to the 2nd extruder
-G92 E0                  ;zero the extruded length
-G1 F200 E10             ;extrude 10mm of feed stock
-G92 E0                  ;zero the extruded length again
-G1 F200 E-{retraction_dual_amount}
-
-T0                      ;Switch to the first extruder
-G92 E0                  ;zero the extruded length
-G1 F200 E10             ;extrude 10mm of feed stock
-G92 E0                  ;zero the extruded length again
-G1 F{travel_speed}
-;Put printing message on LCD screen
-M117 Printing...
+setting('start2.gcode', """; TRIMAKER COSMOS Start GCode
+G21      			; Metric values
+G28 				; Home axis
+G1 X0 Y0 Z15
+G90					; Absolute positioning
+M82      			; Set extruder to absolute mode
+M104 s190 		; Voy calentando el extrusor hasta 190C
+G1 Z25 F200
+G1 X130 Y180 F2500	; Moves extruder to front left side of platform
+M190 S{print_bed_temperature}   ;Add your own bed temperature line
+M109 S{print_temperature}       ;Add your own temperature line
+G92 E0				; Zero the extruded length
+G1 F100 E1          ; Extrude 3mm of feed stock
+G92 E0              ; Zero the extruded length again
+G1 X50 Z0 F200      ; Toca la plataforma para despegar el filamento que colgando
+G1 Z10 F200         ; A partir de aca arranca la rutina
+G1 F2000
+; Put printing message on LCD screen
+M117 Imprimiendo
 """, str, 'alteration', 'alteration')
 #######################################################################################
 setting('end2.gcode', """;End GCode
-M104 T0 S0                     ;extruder heater off
-M104 T1 S0                     ;extruder heater off
-M140 S0                     ;heated bed heater off (if you have it)
-
-G91                                    ;relative positioning
-G1 E-1 F300                            ;retract the filament a bit before lifting the nozzle, to release some of the pressure
-G1 Z+0.5 E-5 X-20 Y-20 F{travel_speed} ;move Z up a bit and retract filament even more
-G28 X0 Y0                              ;move X/Y to min endstops, so the head is out of the way
-
-M84                         ;steppers off
-G90                         ;absolute positioning
-;{profile_string}
+G90 				; Set to absolute positioning
+G1 X0 Y0 Z130		; Get extruder out of way
+G92 E0			 	; Reset extruder position
+G1 E-1			; Reduce filament pressure
+G92 E0			; Reset extruder position again
+M140 S0 			; Disable heated bed
+M104 S0 			; Disable extruder
+M84 				; Turn steppers off
+M107			; Fan off
+M117 Impresion finalizada
 """, str, 'alteration', 'alteration')
 #######################################################################################
 setting('start3.gcode', """;Sliced at: {day} {date} {time}
