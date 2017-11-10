@@ -753,7 +753,7 @@ def getDefaultProfilePath():
 	"""
 	return os.path.join(getBasePath(), 'current_profile.ini')
 
-def loadProfile(filename, allMachines = False):
+def loadProfile(filename, allMachines = True):
 	"""
 		Read a profile file as active profile settings.
 	:param filename:    The ini filename to save the profile in.
