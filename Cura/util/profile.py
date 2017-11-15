@@ -380,6 +380,7 @@ G1 Z10 F200         ; A partir de aca arranca la rutina
 G1 F2000
 ; Put printing message on LCD screen
 M117 Imprimiendo
+			
 """, str, 'alteration', 'alteration_1')
 #######################################################################################
 setting('end.gcode', """;End GCode
