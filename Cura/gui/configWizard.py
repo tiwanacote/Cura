@@ -1180,9 +1180,9 @@ class bedLevelWizardMain(InfoPage): #Rulo: Modifico para que sea el instructivo 
 	def OnHome(self, e):
 		global cnt
 		cnt = 0
+		self.comm.sendCommand('M851 Z0') #Seteo en 0 el offset
 		self.comm.sendCommand('G28')
 		self.comm.sendCommand('M400')
-		self.comm.sendCommand('M851 Z0') #Seteo en 0 el offset
 		self.comm.sendCommand('M211 Z0 S0')#Habilito para ir a Z negativos
 		self.comm.sendCommand('M500')	#Guardo en EEPROM
 		self.comm.sendCommand('G1 X61 Y0 Z0')	#Llevo la boquilla a la altura del sensor

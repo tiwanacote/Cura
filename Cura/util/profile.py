@@ -354,6 +354,7 @@ M140 S0                     ;heated bed heater off (if you have it)
 G01 X0 Y0 Z200                   ;move X/Y to min endstops
  so the head is out of the way
 M84                         ;steppers off
+M107
 G90                         ;absolute positioning
 M190 S0.000000
 M109 S0.000000
