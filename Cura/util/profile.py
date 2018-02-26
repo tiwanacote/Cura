@@ -344,7 +344,7 @@ G1 F7200
 M117 Printing...
         
 
-""", str, 'machine', 'machine_0')
+""", str, 'alteration', 'machine')
 #######################################################################################
 setting('end.gcode', """;End GCode
 M104 S0
@@ -357,7 +357,7 @@ G90                         ;absolute positioning
 M190 S0.000000
 M109 S0.000000
 
-""", str, 'machine', 'machine_0')
+""", str, 'alteration', 'machine')
 #######################################################################################
 setting('start1.gcode', """; TRIMAKER COSMOS Start GCode 
 G21      			; Metric values
@@ -379,7 +379,7 @@ G1 F2000
 ; Put printing message on LCD screen
 M117 Imprimiendo
 			
-""", str, 'machine', 'machine_1')
+""", str, 'alteration', 'machine')
 #######################################################################################
 setting('end1.gcode', """;End GCode
 G90 				; Set to absolute positioning
@@ -392,7 +392,7 @@ M104 S0 			; Disable extruder
 M84 				; Turn steppers off
 M107			; Fan off
 M117 Impresion finalizada
-""", str, 'machine', 'machine_1')
+""", str, 'alteration', 'machine')
 #######################################################################################
 setting('start3.gcode', """;Sliced at: {day} {date} {time}
 ;Basic settings: Layer height: {layer_height} Walls: {wall_thickness} Fill: {fill_density}
