@@ -359,7 +359,7 @@ M109 S0.000000
 
 """, str, 'alteration', 'alteration')
 #######################################################################################
-setting('start2.gcode', """; TRIMAKER COSMOS Start GCode 
+setting('start1.gcode', """; TRIMAKER COSMOS Start GCode 
 G21      			; Metric values
 G28 				; Home axis
 G1 X0 Y0 Z15
@@ -381,7 +381,7 @@ M117 Imprimiendo
 			
 """, str, 'alteration', 'alteration')
 #######################################################################################
-setting('end2.gcode', """;End GCode
+setting('end1.gcode', """;End GCode
 G90 				; Set to absolute positioning
 G1 X0 Y0 Z130		; Get extruder out of way
 G92 E0			 	; Reset extruder position
