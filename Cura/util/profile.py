@@ -328,7 +328,7 @@ setting('object_center_y', -1, float, 'hidden', 'hidden')
 #;{profile_string}
 #""", str, 'alteration', 'alteration')
 
-setting('start1.gcode', """; TRIMAKER COSMOS II Start GCode
+setting('start.gcode', """; TRIMAKER COSMOS II Start GCode
 G21
 G90        ;absolute positioning
 M82        ;set extruder to absolute mode
@@ -344,9 +344,9 @@ G1 F7200
 M117 Printing...
         
 
-""", str, 'alteration', 'alteration_1')
+""", str, 'alteration', 'alteration')
 #######################################################################################
-setting('end1.gcode', """;End GCode
+setting('end.gcode', """;End GCode
 M104 S0
 M140 S0                     ;heated bed heater off (if you have it)
 G01 X0 Y0 Z200                   ;move X/Y to min endstops
@@ -357,9 +357,9 @@ G90                         ;absolute positioning
 M190 S0.000000
 M109 S0.000000
 
-""", str, 'alteration', 'alteration_1')
+""", str, 'alteration', 'alteration')
 #######################################################################################
-setting('start.gcode', """; TRIMAKER COSMOS Start GCode 
+setting('start2.gcode', """; TRIMAKER COSMOS Start GCode 
 G21      			; Metric values
 G28 				; Home axis
 G1 X0 Y0 Z15
@@ -379,9 +379,9 @@ G1 F2000
 ; Put printing message on LCD screen
 M117 Imprimiendo
 			
-""", str, 'alteration', 'alteration_0')
+""", str, 'alteration', 'alteration')
 #######################################################################################
-setting('end.gcode', """;End GCode
+setting('end2.gcode', """;End GCode
 G90 				; Set to absolute positioning
 G1 X0 Y0 Z130		; Get extruder out of way
 G92 E0			 	; Reset extruder position
@@ -392,7 +392,7 @@ M104 S0 			; Disable extruder
 M84 				; Turn steppers off
 M107			; Fan off
 M117 Impresion finalizada
-""", str, 'alteration', 'alteration_0')
+""", str, 'alteration', 'alteration')
 #######################################################################################
 setting('start3.gcode', """;Sliced at: {day} {date} {time}
 ;Basic settings: Layer height: {layer_height} Walls: {wall_thickness} Fill: {fill_density}
