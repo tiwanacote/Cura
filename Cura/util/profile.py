@@ -362,7 +362,7 @@ M109 S0.000000
 """, str, 'alteration', 'alteration')
 
 #######################################################################################
-setting('start.gcode', """; TRIMAKER COSMOS Start GCode
+setting('start.gcode', """; TRIMAKER COSMOS Start GCode RRRRRRULO
 G21      			; Metric values
 G28 				; Home axis
 G1 X0 Y0 Z15
