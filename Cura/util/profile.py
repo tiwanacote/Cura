@@ -345,7 +345,7 @@ G1 F7200
 M117 Printing...
         
 
-""", str, 'alteration', 'alteration')
+""", str, 'alteration', 'alteration_0')
 #######################################################################################
 setting('end.gcode', """;End GCode
 
@@ -359,10 +359,10 @@ G90                         ;absolute positioning
 M190 S0.000000
 M109 S0.000000
 
-""", str, 'alteration', 'alteration')
+""", str, 'alteration', 'alteration_0')
 
 #######################################################################################
-setting('start.gcode', """; TRIMAKER COSMOS Start GCode RRRRRRULO
+setting('start.gcode', """; TRIMAKER COSMOS Start GCode 
 G21      			; Metric values
 G28 				; Home axis
 G1 X0 Y0 Z15
