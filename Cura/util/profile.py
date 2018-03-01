@@ -329,6 +329,8 @@ setting('object_center_y', -1, float, 'hidden', 'hidden')
 #""", str, 'alteration', 'alteration')
 
 setting('start.gcode', """; TRIMAKER COSMOS II Start GCode
+
+;BORRAR SI SE QUIERE USAR COSMOS I  
 G21
 G90        ;absolute positioning
 M82        ;set extruder to absolute mode
@@ -342,20 +344,21 @@ G92 E0                  ;zero the extruded length again
 G1 F7200
 ;Put printing message on LCD screen
 M117 Printing...
-        
+      
 
 """, str, 'alteration', 'alteration_0')
 #######################################################################################
-setting('end.gcode', """;End GCode
+setting('end.gcode', """;End GCode Cosmos II
+;BORRAR SI SE QUIERE USAR COSMOS I
 M104 S0
 M140 S0                     ;heated bed heater off (if you have it)
-G01 X0 Y0 Z200                   ;move X/Y to min endstops
- so the head is out of the way
+G01 X0 Y0 Z200       ;move X/Y to 0 so the head is out of the way
 M84                         ;steppers off
 M107
 G90                         ;absolute positioning
 M190 S0.000000
 M109 S0.000000
+
 
 """, str, 'alteration', 'alteration_0')
 #######################################################################################
